@@ -31,7 +31,33 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+    console.log(fifteen);
 
+    const fullName = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.table(fullName);
+
+    const age = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
+    console.table(age);
+
+    const total = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year);
+    }, 0);
+    console.log(total);
+
+    const yearsLived = inventors.sort(function(a, b) {
+      const lastInventor = a.passed - a.year;
+      const nextInventor = b.passed - b.year;
+      return lastInventor > nextInventor ? -1 : 1;
+    });
+    console.table(yearsLived);
+
+    const alpha = people.sort((lastOne, nextOne) => {
+      const [aLast, aFirst] = lastOne.split(', ');
+      const [bLast, bFirst] = nextOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    console.log(alpha);
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
@@ -53,7 +79,14 @@
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const reduceData = data.reduce(function(obj, item) {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+    console.log(reduceData);
   </script>
 </body>
 </html>
